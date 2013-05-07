@@ -48,10 +48,10 @@
 ###############################################################################
 #// hi coders. my name is Dan Tashman and I wrote this script
 
-print "Welcome to my Ruby Secret Number Game!"
+print "Welcome to the Ruby Secret Number Game!"
 first_name = "Dan"
 last_name = "Tashman"
-print "Created by " + first_name + " " + last_name
+print "This (particular) game created by " + first_name + " " + last_name
 
 
 
