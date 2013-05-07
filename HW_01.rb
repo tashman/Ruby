@@ -51,7 +51,7 @@
 print "Welcome to the Ruby Secret Number Game!"
 first_name = "Dan"
 last_name = "Tashman"
-print "This (particular) game created by " + first_name + " " + last_name
+print "This (particular) game was created by " + first_name + " " + last_name
 
 
 
