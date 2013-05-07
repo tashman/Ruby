@@ -49,9 +49,12 @@
 #// hi coders. my name is Dan Tashman and I wrote this script
 
 print "Welcome to the Ruby Secret Number Game!"
+#// use print, not puts
 first_name = "Dan"
+#// use underscore instead of conCatination
 last_name = "Tashman"
 print "This (particular) game was created by " + first_name + " " + last_name
+#// same text syntax as javascript
 
 
 
