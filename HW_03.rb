@@ -51,56 +51,59 @@
 #Put your solution below this line.
 #
 ###############################################################################
-#// hi coders. my name is Dan Tashman and I wrote this script
 
-puts "Welcome to the Ruby Secret Number Game!"
-first_name = "Dan"
+puts "\nWelcome to the Secret Number Game!"
+
+first_name = "Daniel"
 last_name = "Tashman"
-puts "This (particular) game was created by " + first_name + " " + last_name
 
-puts "What's your name, gorgeous?" 
+puts "Created by " + first_name + " " + last_name
+
+puts "\nWhat's your name, gorgeous?"
+
 player_name = $stdin.gets.chomp
-puts "Hi " + player_name + ", You have 3 guesses to guess the secret number between 1 and 10. Please guess"
 
-secret_number = [set_of_numbers].sample
-#the big secret. Generating a random number between 1-10 (aka set_of_numbers)
+puts "Hi, #{player_name}! You have 3 guesses to guess the Secret Number between 1 and 10"
 
 guesses_left = 3
-#total number of guesses
-
-set_of_numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-#array of integers 1-10
-
-messages = { :win => [ "Congrats! You have guessed the secret number" ]
-			 #player has guessed correctly
-			 :lose => [ "Congrats! You have guessed the secret number" ] 
-			 #game over
-			 :too_low => [ "Sorry, That is not the secret number. You have #{guesses_left} tries left. Try a higher number." ] 
-			 #player guess too low
-			 :too_high => [ "Sorry, That is not the secret number. You have #{guesses_left} tries left. Try a lower number." ] 
-			 #player guess too high
-			}
 
 
-player_guess = $std.puts.compt
-#sets the varable for the user's input (i.e. guess)
+set_of_numbers = (1..10).to_a
 
-loop do
-	break if player_guess == secret_number
-	puts "#{messages :win}"
-	#player victory message
-	while guesses_left <= 3
-		if player_guess > secret_number
-			puts "#{messages :too_high}"
-			#player guess too high 
-		else
-			puts "#{messages :too_low}"
-			#player guess too low 
-		guesses_left - 1
-			#subtract one guess
-		if guesses_left == 0
-			puts "#{[messages :lose]}"
-			#no more guesses. game over
-		end
+secret_number = set_of_numbers.sample
 
- end
+messages = Hash.new
+messages[:win] = "You won!"
+messages[:lose] = "Sorry. You lose. The secret number was #{secret_number}!"
+messages[:too_low] = "Your guess was too low!"
+messages[:too_high] = "Your guess was too high!"
+
+3.times do |count|
+  # execute the below code 3 times
+  puts "\nYou have #{ guesses_left } guesses left!"
+  # guess counter
+  puts "Please make your guess:"
+  # guess request
+  players_guess = $stdin.gets.chomp.to_i
+  #pulls info from input
+  guesses_left -= 1
+  #subtracts 1
+  if secret_number == players_guess
+    puts messages[:win]
+    #winner!
+    puts "You guessed in #{count + 1} turns!"
+    #counter result
+    exit
+  elsif secret_number > players_guess
+    puts messages[:too_low]
+    #guess too low
+  elsif secret_number < players_guess
+    puts messages[:too_high]
+    #guess too high
+  end
+end
+
+
+puts messages[:lose]
+#too many guesses. Player loses
+
