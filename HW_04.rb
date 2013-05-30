@@ -35,8 +35,6 @@
 #
 ###############################################################################
 
-
-
 puts "\nWelcome to the Secret Number Game!"
 
 first_name = "Daniel"
@@ -45,81 +43,64 @@ last_name = "Tashman"
 puts "Created by " + first_name + " " + last_name
 
 puts "\nWhat's your name, gorgeous?"
+#asks player name
 
 player_name = $stdin.gets.chomp
+#player name input
 
 puts "Hi, #{player_name}! You have 3 guesses to guess the Secret Number between 1 and 10"
+#informs player of game rules
 
+remaining_guesses = 0
+#sets variable to hold # of guesses left
 
-set_of_numbers = (1..10).to_a
+set_of_numbers = [1, 2, 3, 4, 5, 6, 7, 8, 10]
+#array of numbers available to choose from
 
 secret_number = set_of_numbers.sample
+#sets the secret number to be a random number
 
-current_guess_count = 1
+puts "\nPlease pick a number."
+#taking the players guess
 
-def guesses_left (current_guess_count)
-	#defines default # of guesses made to zero
-	@current_guess_count = current_guess_count
-	#defines the instance variable
-	3 - @current_guess_count.to_i
-	# subtracts the number of guesses from 3, giving the current number of guesses left.
+def increment_guess_count(integer)
+	integer += 1
+	#incrementally adds one every time the player guesses
 end
 
-
-def increment_guess_count (current_guess_count)
-	@current_guess_count = current_guess_count
-	1 + @current_guess_count 
- 
+def guesses_left(number)
+	3 - number
+	#sets guesses left as 3 minus that number
 end
 
-
-#insert first code part
 
 messages = Hash.new
-messages[:win] = "You won in #{current_guess_count} turns!"
+messages[:win] = "Congrats #{player_name}, #{secret_number} is the correct number! You win!"
 messages[:lose] = "Sorry. You lose. The secret number was #{secret_number}!"
-messages[:too_low] = "Your guess was too low! You have #{current_guess_count} guesses left."
-messages[:too_high] = "Your guess was too high! You have #{current_guess_count} guesses left." 
+messages[:too_low] = "Your guess was too low! Try again."
+messages[:too_high] = "Your guess was too high! Try again." 
 
 
 
-3.times do |count|
-	while increment_guess_count > 3
-		  # execute the below code 3 times
-		  puts "Please make your guess:"
-		  # guess request
-		  players_guess = $stdin.gets.chomp.to_i
-		  #pulls info from input
-
-		  if secret_number == players_guess
-		    puts messages[:win]
-		    #winner!
-		    exit
-		    #exit game
-		  elsif secret_number > players_guess
-		    puts messages[:too_low]
-		    #guess too low
-		  elsif secret_number < players_guess
-		    puts messages[:too_high]
-		    #guess too high
-		  end 
-
-		  	if increment_guess_count == 3
-		  		puts messages[:lose]
-		  		#Lose message
-		  		exit
-		  		#exit game
-		  end
+3.times do
+	while guesses_left(remaining_guesses) > 0	
+	remaining_guesses = increment_guess_count(remaining_guesses)
+	#remaining guesses = a function of remaining guesses	
+	 player_guess = $stdin.gets.chomp.to_i
+		#takes player input and converts it to integer
+		if secret_number == player_guess
+		puts messages[:win]
+		exit
+		#Player correctly guesses
+		elsif secret_number > player_guess 
+		puts messages[:too_low]
+		#player guesses too low
+		elsif secret_number < player_guess 
+		puts messages[:too_high]
+		#player guesses too high
+		end
 	end
-
-
-  
-
 end
 
-
-
-
-
-
-
+puts messages[:lose]
+#player has guessed 3x incorrectly. display lose message
