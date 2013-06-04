@@ -1,0 +1,17 @@
+<h1>Display#display_users</h1>
+<p>Find me in app/views/display/display_users.html.erb</p>
+
+<h1> User </h1>
+<% @users.each do |users| %>
+	<%= users.first_name + " " + users.last_name + " " + users.age + " " + users.email%>
+
+	<br />
+	<h3> * asterisk denotes a teenager</h3>
+	<br />
+
+<h2> Which users have long names (above 10 characters)?</h2>
+<%= all_long_name?.content %>
+
+<h2> Which users are teenagers?</h2>
+<%= is_teen?.content %>
+

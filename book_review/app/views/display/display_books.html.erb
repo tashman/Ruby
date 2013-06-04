@@ -1,0 +1,7 @@
+<h1>Display#display_books</h1>
+<p>Find me in app/views/display/display_books.html.erb</p>
+
+<h1> Books </h1>
+<% @book.each do |books| %>
+	<%= books.title + " " + books.author %>
+<% end %>
