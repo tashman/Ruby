@@ -25,9 +25,21 @@
 
 #	Include the Player, SecretNumber, and Game classes
 
+require File.join(File.dirname(__FILE__), 'Player')
+require File.join(File.dirname(__FILE__), 'SecretNumber')
+require File.join(File.dirname(__FILE__), 'Game')
 
 #   Instantiate a new Game (using your preferred number of guesses, range of numbers)
+
+def total_guesses
+	@total_guesses = 3
+	end
+
+
+game = Game.new(total_guesses,10)
+
 
 
 #   Start the Game. 
 
+game.initialize

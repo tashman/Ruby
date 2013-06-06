@@ -1,6 +1,6 @@
 class Game
 #	Make sure that all the instance variables in this class may only be READ and not WRITTEN to. 
-  attr_reader :guesses_allowed, :current_guess_count, :current_guess
+  attr_reader :guesses_allowed, :current_guess_count, :current_guess; :total_guesses
 
   @@messages = { win: "You won!",
                  lose:  "You lost! :-(",
@@ -24,13 +24,13 @@ class Game
         # white the # of remaining guesses 
         3.times do |count|
             # execute the below code 3 times
-            puts "\nYou have #{ guesses_left } guesses left!"
+            puts "You have #{ guesses_left } guesses left!"
             # guess counter
-            puts "Please make your guess:"
+            puts "\nPlease make your guess:"
             # guess request
             players_guess = $stdin.gets.chomp.to_i
             #pulls info from input
-            guesses_left -= 1
+            guesses_left - 1
             #subtracts 1
       end
   
@@ -67,7 +67,7 @@ class Game
       #assigns player name 
 
       puts "Hi, #{player_name}! You have 3 guesses to guess the Secret Number between 1 and 10"
-      puts "Please make your guess:"
+      puts "\nPlease make your guess:"
       #asks for player input
   
       players_guess = $stdin.gets.chomp.to_i
@@ -114,8 +114,6 @@ class Game
   # Calculates the guesses the player has left.
   def guesses_left
 
-  
-  
   end
 end
 
