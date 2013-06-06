@@ -1,4 +1,7 @@
 class SecretNumber
+	  attr_reader :set_of_numbers, :secret_number
+	  #imports set of numbers, secret number from initialize method (read only)
+
 #   *** NOTE ***  
 #	Make sure that all the instance variables in this class may only be READ and not WRITTEN to. 
 #  		(hint: Review ruby documentation for attr_reader).
@@ -10,6 +13,7 @@ class SecretNumber
 	# Initializes the secret number
 	def initialize(set_of_numbers)
 		@set_of_numbers = [1..10].to_a
+		 @secret_number = generate_secret_number
 		
 	
   	end
@@ -19,9 +23,7 @@ class SecretNumber
 	private 
 
 	def generate_secret_number(initialize)
-		attr_reader :set_of_numbers
-		#imports set of numbers from initialize method (read only)
-		@generate_secret_number = set_of_numbers.sample
+		@generate_secret_number = set_of_numbers.to_a.sample
 		#pick a random number from the Array 'set_of_numbers'
 
   	end

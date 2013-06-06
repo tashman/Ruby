@@ -25,9 +25,9 @@
 
 #	Include the Player, SecretNumber, and Game classes
 
-require File.join(File.dirname(__FILE__), 'Player')
-require File.join(File.dirname(__FILE__), 'SecretNumber')
-require File.join(File.dirname(__FILE__), 'Game')
+require_relative 'lib/player.rb'
+require_relative 'lib/secret_number.rb'
+require_relative 'lib/game.rb'
 
 #   Instantiate a new Game (using your preferred number of guesses, range of numbers)
 
@@ -36,10 +36,10 @@ def total_guesses
 	end
 
 
-game = Game.new(total_guesses,10)
+game = Game.new(3,(0..10))
 
 
 
 #   Start the Game. 
 
-game.initialize
+game.start_game

@@ -1,5 +1,5 @@
 class Users < ActiveRecord::Base
-  attr_accessible :age, :email, :first_name, :last_name
+  attr_accessible :age, :email, :first_name, :last_name, 
 
 
 	def is_teen?
@@ -21,7 +21,7 @@ class Users < ActiveRecord::Base
 	end
 
 	def all_long_name?
-			@all_long_name? = @users.has_long_name?to_a 			
+			@all_long_name? = @has_long_name?.each do |has_long_name?|			
 			#pull the 'true' results from has_long_name? and put them into a new array
 			return @all_long_name?	
 			#return that array

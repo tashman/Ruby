@@ -1,6 +1,6 @@
 class Game
 #	Make sure that all the instance variables in this class may only be READ and not WRITTEN to. 
-  attr_reader :guesses_allowed, :current_guess_count, :current_guess; :total_guesses
+  attr_reader :guesses_allowed, :current_guess_count, :current_guess; :total_guesses; :generate_secret_number
 
   @@messages = { win: "You won!",
                  lose:  "You lost! :-(",
@@ -15,31 +15,23 @@ class Game
 	# Creates a new instance of the SecretNumber class and assigns it to the secret_number. Don't forget to pass along the
 	# necessary parameters.
   	# initializes the current guess to nil
-  def initialize(guesses_allowed=3, set_of_numbers)
-      @guesses_allowed = guesses_allowed
-      @set_of_numbers = set_of_numbers.to_i
+    def initialize(guesses_allowed, set_of_numbers)
+      @guesses_allowed = guesses_allowed || 3
+      @current_guess_count = 0
+      @player = Player.new()
+      @secret_number = SecretNumber.new(set_of_numbers)
+      @current_guess = nil
     end
 
-      while @guesses_allowed > current_guess_count
-        # white the # of remaining guesses 
-        3.times do |count|
-            # execute the below code 3 times
-            puts "You have #{ guesses_left } guesses left!"
-            # guess counter
-            puts "\nPlease make your guess:"
-            # guess request
-            players_guess = $stdin.gets.chomp.to_i
-            #pulls info from input
-            guesses_left - 1
-            #subtracts 1
-      end
+  
   
 
   # Print who made this wonderful program :-)
-  def print_created_by
-    puts "\nmade by dan tashman"
-
-  end
+    def print_created_by
+      first_name = "Daniel"
+      last_name = "Tashman"
+      puts "Created by " + first_name + " " + last_name
+    end
   
 
 	# Calls `print_created_by` so that your players knows you created the game.
@@ -54,27 +46,34 @@ class Game
   def start_game
 
       puts "\nWelcome to the Secret Number Game!"
-
-      first_name = "Daniel"
-      last_name = "Tashman"
-
-      puts "Created by " + first_name + " " + last_name
-
+      print_created_by
+    
       puts "\nWhat's your name, gorgeous?"
       #asks name
 
-      player_name = $stdin.gets.chomp
+      @player_name = $stdin.gets.chomp
       #assigns player name 
 
-      puts "Hi, #{player_name}! You have 3 guesses to guess the Secret Number between 1 and 10"
+      puts "Hi, #{@player_name}! You have #{guesses_allowed} guesses to guess the Secret Number between 1 and 10"
       puts "\nPlease make your guess:"
       #asks for player input
   
       players_guess = $stdin.gets.chomp.to_i
       #pulls player guess from input
 
-  end
+      while @current_guess_count < @guesses_allowed && !guess_correct?(@current_guess) do
+        puts "\nYou have #{ guesses_left } guesses left!"
+        puts "Please make your guess:"
+        @current_guess = $stdin.gets.chomp.to_i
+        increment_guess_count
+      end
 
+      unless guess_correct?(@current_guess)
+      puts @@messages[:lose]
+      puts "The secret number was #{@secret_number.secret_number}!"
+      end
+ 
+  end
 
 
 	# This method checks if the player guessed the correct secret number. 
@@ -82,38 +81,48 @@ class Game
 	# Use the `@@messages` Hash to display this feedback.
 	# Also let the player know how many guesses they have left.
 	# If the guess is correct, make sure to return true, otherwise return false.
+  
   def guess_correct?(guess)
-    if secret_number == players_guess
-      puts messages[:win]
+    if players_guess == nil
+        return false
+      #return a false value for booleann use later
+    elsif @secret_number.secret_number == players_guess
+      puts @@messages[:win]
       #winner!
-      puts "You guessed in #{count + 1} turns!"
+      puts "You guessed in #{@current_guess_count} turns!"
       #counter result
+        return true
+        #return a true value
       exit
-    elsif secret_number > players_guess
-      puts messages[:too_low]
+    elsif @secret_number.secret_number > players_guess
+      puts @@messages[:too_low]
        #guess too low
-      puts "You have #{count - 1} guesses left."
+      puts "\nYou have #{guesses_left} guesses left. Please try again."
       #reminder of remaining guesses
-    elsif secret_number < players_guess
-      puts messages[:too_high]
+        return false
+        #return a false value
+    elsif @secret_number.secret_number < players_guess
+      puts @@messages[:too_high]
        #guess too high
-      puts "You have #{count - 1} guesses left."
+      puts "\nYou have #{guesses_left} guesses left. Please try again."
       #reminder of remaining guesses
+         return false
+        #return a false value
     end
+
   end
 
 
   # This method should increment every time the player guesses incorrectly.
-  def increment_guess_count
-    for each.players_guess
-    
-    
-  end
-  
+    def increment_guess_count
+      @current_guess_count += 1
+    end
 
-  # Calculates the guesses the player has left.
-  def guesses_left
 
-  end
+  # Helper method for printing information for the Player to the screen.
+    def guesses_left
+      @guesses_allowed - @current_guess_count
+    end
+
 end
 
