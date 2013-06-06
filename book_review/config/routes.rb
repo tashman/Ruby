@@ -1,4 +1,6 @@
 BookReview::Application.routes.draw do
+  get "home/index"
+
   get "display/display_users"
 
   get "display/display_reviews"
@@ -54,7 +56,7 @@ BookReview::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+  root :to => 'display#display_users'
 
   # See how all your routes lay out with "rake routes"
 
