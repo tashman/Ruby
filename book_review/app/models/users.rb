@@ -20,11 +20,11 @@ class Users < ActiveRecord::Base
 		end
 	end
 
-# 	def all_long_name?
-# 			@all_long_name? = @users.has_long_name?to_a
-# 			#pull the 'true' results from has_long_name? and put them into a new array
-# 			return @all_long_name?	
-# 			#return that array
-# 	end
+	def all_long_name?
+			@all_long_name? = @users.has_long_name?to_a 			
+			#pull the 'true' results from has_long_name? and put them into a new array
+			return @all_long_name?	
+			#return that array
+ 	end
 	
 end
